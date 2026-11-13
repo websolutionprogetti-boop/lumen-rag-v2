@@ -1,0 +1,5 @@
+# Solo per la valutazione con RAGAS (scripts/ragas_punteggi.py), in un ambiente separato dall'app
+ragas==0.4.3
+langchain-community<0.4
+langchain-aws<1
+boto3
