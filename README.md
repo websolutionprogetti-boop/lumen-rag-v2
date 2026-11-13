@@ -58,7 +58,7 @@ flowchart LR
 | Ricerca | BM25 (parole chiave) | ibrida: embeddings Titan + BM25 |
 | Hosting | Cloudflare Pages | AWS Lambda + S3 + DynamoDB |
 | Azioni | nessuna | prenotazione simulata |
-| Test | prove manuali | 31 test automatici + valutazione con 29 domande sul modello vero |
+| Test | prove manuali | 35 test automatici + valutazione con 29 domande sul modello vero |
 
 ## Protezioni di spesa e sicurezza
 
@@ -94,7 +94,7 @@ docker run -p 8000:8000 -e LUMEN_MODALITA=finto lumen-v2
 ## Test e valutazione
 
 ```bash
-LUMEN_MODALITA=finto python -m pytest -q        # 31 test, senza AWS, in meno di un secondo
+LUMEN_MODALITA=finto python -m pytest -q        # 35 test, senza AWS, in meno di un secondo
 python scripts/valuta.py                        # 29 domande al modello vero (serve AWS, pochi centesimi)
 ```
 
@@ -108,6 +108,7 @@ In AWS CloudShell, dalla cartella del progetto:
 
 ```bash
 bash deploy/crea_risorse.sh      # crea bucket, indice, tabella, ruolo, funzione e indirizzo web
+bash deploy/aggiorna_codice.sh   # aggiorna solo il codice della funzione (dopo aver caricato lumen-v2.zip)
 bash deploy/elimina_risorse.sh   # cancella tutto
 ```
 
