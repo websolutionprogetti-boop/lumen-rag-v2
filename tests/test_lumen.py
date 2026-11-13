@@ -6,7 +6,7 @@ os.environ["LUMEN_MODALITA"] = "finto"
 import pytest  # noqa: E402
 from fastapi.testclient import TestClient  # noqa: E402
 
-from app.agente import fonti_citate  # noqa: E402
+from app.agente import fonti_citate, pulisci  # noqa: E402
 from app.documenti import carica_locale, frammenta  # noqa: E402
 from app.limiti import LimiteAlMinuto, TettoMensile  # noqa: E402
 from app.privacy import oscura  # noqa: E402
@@ -106,6 +106,18 @@ def test_fonti_citate_ignora_numeri_fuori_intervallo(ricercatore):
     risultati = ricercatore.cerca("parcheggio")
     fonti = fonti_citate("C'è il parcheggio [1]. Vedi anche [9] e [0].", risultati)
     assert [f["n"] for f in fonti] == [1]
+
+
+@pytest.mark.parametrize("grezza,attesa", [
+    ('Richiesta registrata con il codice DEMO-922429. {"tool_name": "prenota_appuntamento", "result": "{}"} <frammento numero="4">',
+     "Richiesta registrata con il codice DEMO-922429."),
+    ("In uno studio vero la segreteria confermerebbe. Ecco i dettagli della tua richiesta:.",
+     "In uno studio vero la segreteria confermerebbe."),
+    ("<response>Siamo aperti il sabato [2].</response>", "Siamo aperti il sabato [2]."),
+    ("Orari: dalle 9:00 alle 13:00 [1].", "Orari: dalle 9:00 alle 13:00 [1]."),
+])
+def test_pulisci_toglie_i_residui_tecnici(grezza, attesa):
+    assert pulisci(grezza) == attesa
 
 
 # ---------------------------------------------------------------- strumento simulato
