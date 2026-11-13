@@ -128,11 +128,28 @@ def fonti_citate(risposta: str, risultati: list[Document]) -> list[dict]:
             for n in usati]
 
 
+_RESIDUI = ('{"tool_name"', '{"esito"', "<frammento", "</frammento")
+
+
+def pulisci(testo: str) -> str:
+    """Toglie dalla risposta i pezzi tecnici che il modello a volte ricopia (risultato grezzo dello
+    strumento, tag dei frammenti) e una frase finale rimasta in sospeso con i due punti."""
+    t = re.sub(r"</?(response|risposta|answer)>", "", testo)
+    for residuo in _RESIDUI:
+        k = t.find(residuo)
+        if k >= 0:
+            t = t[:k]
+    t = t.rstrip()
+    if t.endswith((":", ":.")):
+        t = re.sub(r"\s*[^.!?\n]*:\.?$", "", t)
+    return t.strip()
+
+
 def _testo(messaggio) -> str:
     c = messaggio.content
     if isinstance(c, list):  # alcuni modelli restituiscono blocchi
         c = "".join(b.get("text", "") for b in c if isinstance(b, dict))
-    return re.sub(r"</?(response|risposta|answer)>", "", str(c)).strip()
+    return pulisci(str(c))
 
 
 def rispondi(grafo, ricercatori: dict[str, Ricercatore], corpo: dict) -> dict:
@@ -159,6 +176,7 @@ def rispondi(grafo, ricercatori: dict[str, Ricercatore], corpo: dict) -> dict:
         codici = re.findall(r"DEMO-[0-9A-F]{6}", " ".join(str(a["risultato"]) for a in azioni))
         if codici and codici[-1] not in risposta:  # il codice deve sempre comparire nella conferma
             risposta += (f" Request code: {codici[-1]}." if lingua == "en" else f" Codice della richiesta: {codici[-1]}.")
+    risposta = re.sub(r"\s*[^.!?\n]*:\s*\.(?=\s|$)", "", risposta)  # frase rimasta in sospeso ("...:.")
     return {
         "risposta": risposta,
         "nonLoSo": risposta.startswith(NON_LO_SO[lingua]),
