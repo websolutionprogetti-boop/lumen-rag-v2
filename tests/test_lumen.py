@@ -1,4 +1,4 @@
-example"""Test automatici senza AWS (LUMEN_MODALITA=finto): non costano nulla e girano in pochi secondi."""
+"""Test automatici senza AWS (LUMEN_MODALITA=finto): non costano nulla e girano in pochi secondi."""
 import os
 
 os.environ["LUMEN_MODALITA"] = "finto"
