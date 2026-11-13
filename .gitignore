@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.env.*
+indice/
+valutazione.json
+deploy/*.zip
+deploy/pacchetto/
+.pytest_cache/
