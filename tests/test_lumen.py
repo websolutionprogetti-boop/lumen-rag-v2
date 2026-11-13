@@ -1,4 +1,4 @@
-"""Test automatici senza AWS (LUMEN_MODALITA=finto): non costano nulla e girano in pochi secondi."""
+example"""Test automatici senza AWS (LUMEN_MODALITA=finto): non costano nulla e girano in pochi secondi."""
 import os
 
 os.environ["LUMEN_MODALITA"] = "finto"
@@ -49,7 +49,7 @@ def test_frammenti_hanno_titolo_e_numero():
 # ---------------------------------------------------------------- dati personali
 
 @pytest.mark.parametrize("testo,tipo", [
-    ("scrivimi a mario.rossi@gmail.com", "email"),
+    ("scrivimi a mario.rossi@example.com", "email"),
     ("il mio cellulare è 333 123 4567", "telefono"),
     ("codice fiscale RSSMRA80A01H501U", "codice fiscale"),
     ("IBAN IT60X0542811101000000123456", "IBAN"),
