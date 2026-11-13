@@ -1,0 +1,53 @@
+{
+  "studio": {
+    "nome": "Studio Dentistico Lumen",
+    "nota": "studio fittizio, creato per una demo"
+  },
+  "documenti": [
+    {
+      "id": "orari",
+      "titolo": "Opening hours and contacts",
+      "testo": "Lumen Dental Clinic is open Monday to Friday from 8:30 am to 7:00 pm without a lunch break. On Saturdays it is open from 9:00 am to 1:00 pm, by appointment only. The clinic is closed on Sundays and public holidays.\n\nThe front desk answers the phone at 045 000 0000 Monday to Friday from 9:00 am to 6:30 pm. Outside these hours you can leave a voicemail or write to info@studiolumen.example: emails are answered within one working day.\n\nThe clinic is at Via Immaginaria 12, Verona (fictitious address), on the first floor with a lift. It is wheelchair accessible.\n\nParking: there are 4 spaces reserved for patients in the inner courtyard. Otherwise there is a paid public car park 200 metres away. The nearest bus stop is 100 metres away.\n\nHoliday closures: the clinic closes for two weeks in August, usually around 15 August, and from Christmas to 6 January. Exact dates are announced one month in advance on the website and in the waiting room."
+    },
+    {
+      "id": "prezzi",
+      "titolo": "Treatments and indicative prices",
+      "testo": "Prices are indicative and may vary depending on the clinical case. The final price is always given in a written estimate before treatment starts.\n\nFirst visit with a complete check-up: 50 euros. If professional teeth cleaning is done in the same session, the first visit is free.\n\nProfessional teeth cleaning (scaling and polishing): 70 euros. Teeth cleaning with surface stain removal (air polishing): 90 euros.\n\nIntraoral X-ray (small, of a single tooth): 20 euros. Panoramic X-ray (of the whole mouth): 40 euros. X-rays are taken at the clinic.\n\nComposite filling (treatment of a cavity): from 90 to 140 euros, depending on its size. Root canal treatment: from 250 to 450 euros, depending on the number of canals in the tooth.\n\nSimple extraction: 90 euros. Wisdom tooth extraction: from 150 to 300 euros.\n\nIn-clinic professional whitening: 300 euros. Home whitening kit with custom trays: 250 euros.\n\nCeramic crown: from 600 euros. Dental implant with crown: from 1,300 euros. Implants and prostheses always require a visit and a personalised estimate.\n\nClear aligner orthodontics: the cost depends on the length of treatment and is stated in the estimate after the orthodontic visit, which costs 60 euros."
+    },
+    {
+      "id": "prima-visita",
+      "titolo": "First visit: how it works and what to bring",
+      "testo": "The first visit takes about 45 minutes. The dentist checks teeth, gums and bite and takes an X-ray if needed. At the end they explain what they found and, if treatment is needed, give you a written estimate with the different options.\n\nWhat to bring: an identity document, your health insurance card, any recent X-rays (from the last 2 years) and a list of the medicines you take regularly.\n\nBefore the visit we will ask you to fill in a short health questionnaire. The questionnaire is filled in at the clinic, on paper or on a tablet, and must not be sent by email or through this chat.\n\nMinors must be accompanied by a parent or legal guardian.\n\nPlease arrive 10 minutes before your appointment to register.\n\nThe first visit can be booked by phoning the front desk or by email. There is usually availability within a week."
+    },
+    {
+      "id": "appuntamenti",
+      "titolo": "Appointments, late arrivals and cancellations",
+      "testo": "Appointments are booked, moved or cancelled by phoning the front desk or by email. This chat cannot book or change appointments.\n\nThe day before your appointment the clinic sends a reminder text message.\n\nCancellations: please cancel or move an appointment at least 24 hours in advance. For a Monday appointment, cancel by Friday at 6:30 pm.\n\nIf an appointment is not cancelled and the patient does not show up, a 30 euro fee for the reserved time is charged from the second time. Nothing is charged the first time.\n\nLate arrivals: if you arrive more than 15 minutes late we may not be able to complete the planned session and may need to reschedule it, so as not to keep the next patients waiting.\n\nWaiting list: if you need an appointment earlier than the first available date, ask to be put on the waiting list. We will call you as soon as a slot opens up."
+    },
+    {
+      "id": "pagamenti",
+      "titolo": "Payments, estimates and tax deductions",
+      "testo": "Payment is made at the end of each session. The clinic accepts debit cards, credit cards, bank transfers and cash.\n\nFor long treatments (for example implants or orthodontics) you can pay in interest-free instalments, agreeing on the payment plan when the estimate is made.\n\nEstimates are always written, free after the visit and valid for 6 months.\n\nTax deduction: dental expenses are healthcare expenses and entitle you to a 19% deduction in the Italian tax return, for the part exceeding the 129.11 euro annual threshold. To get the deduction, payment must be made by a traceable method (card or bank transfer): cash payments are not deductible.\n\nThe clinic always issues an invoice and sends expense data to the Italian Health Card System (Sistema Tessera Sanitaria) for the pre-filled tax return, unless the patient objects.\n\nThe clinic is not part of the Italian National Health Service. It has agreements with some supplementary health funds: ask the front desk whether yours is one of them."
+    },
+    {
+      "id": "urgenze",
+      "titolo": "Emergencies",
+      "testo": "During opening hours the clinic keeps some slots free every day for patients' emergencies: severe pain, swelling, a broken tooth, a lost filling or crown. Phone the front desk and explain that it is an emergency: we will try to see you the same day.\n\nOutside opening hours the clinic has no on-call service.\n\nIn a serious emergency, such as a heavy blow to the face, difficulty breathing or swallowing, swelling that spreads quickly to the face or neck, or a high fever with swelling, call 112 or go to the emergency department.\n\nIf a permanent tooth is knocked out by an accident, it is an emergency: call the clinic or 112 straight away.\n\nThis chat cannot assess symptoms or give medical advice: for any doubt about your health, contact the clinic or your doctor."
+    },
+    {
+      "id": "bambini",
+      "titolo": "Children and paediatric dentistry",
+      "testo": "The clinic also treats children, with a dentist dedicated to paediatric dentistry on Tuesday and Thursday afternoons.\n\nAt what age should a child first see the dentist? We recommend bringing children for a first check-up at around 3 years of age, or earlier if parents notice spots or problems on the baby teeth.\n\nThe children's first visit is designed to let them get used to the clinic and the instruments, without rushing. It takes about 30 minutes and costs 40 euros.\n\nFissure sealants on permanent molars, to prevent cavities: 35 euros per tooth. They are usually done between the ages of 6 and 12.\n\nMinors must be accompanied by a parent or legal guardian, who signs the consent to treatment.\n\nFrom the age of 7, children can have an orthodontic check-up to assess the growth and alignment of their teeth."
+    },
+    {
+      "id": "igiene-faq",
+      "titolo": "Hygiene, prevention and FAQ",
+      "testo": "How often should I have my teeth professionally cleaned? For most patients we recommend a cleaning session every 6 months. The dentist may suggest a different frequency depending on each person's situation.\n\nA cleaning session takes about 45 minutes and includes tartar removal, polishing and personalised advice on using a toothbrush, floss and interdental brushes.\n\nThe clinic uses instruments sterilised in an autoclave for each patient and disposable materials where required.\n\nCan I have treatment during pregnancy? Many treatments can be done, but always tell the clinic when booking, so the dentist can plan the session in the most suitable way.\n\nYou can get a copy of your medical record and X-rays: ask at the front desk and it will be ready within 7 days.\n\nFree wifi for patients is available in the waiting room.\n\nThe clinic speaks Italian and English."
+    },
+    {
+      "id": "privacy-studio",
+      "titolo": "Privacy and patient data",
+      "testo": "The clinic processes patients' data, including health data, only for treatment and legal obligations, in accordance with the GDPR. The full privacy notice is given and signed at the clinic at the first visit.\n\nHealth data, such as symptoms, illnesses, medicines or medical reports, are only shared in person at the clinic or during the visit. They must never be sent through this chat.\n\nThis chat is an automated assistant based on artificial intelligence: it only answers general questions about the clinic using the published documents, does not keep conversations and has no access to patients' medical records or appointments.\n\nTo exercise your rights over your data (access, rectification, erasure) you can write to privacy@studiolumen.example."
+    }
+  ]
+}

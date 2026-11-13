@@ -1,0 +1,53 @@
+{
+  "studio": {
+    "nome": "Studio Dentistico Lumen",
+    "nota": "studio fittizio, creato per una demo"
+  },
+  "documenti": [
+    {
+      "id": "orari",
+      "titolo": "Orari e contatti",
+      "testo": "Lo Studio Dentistico Lumen è aperto dal lunedì al venerdì dalle 8:30 alle 19:00 con orario continuato. Il sabato è aperto dalle 9:00 alle 13:00, solo su appuntamento. La domenica e nei giorni festivi lo studio è chiuso.\n\nLa segreteria risponde al telefono 045 000 0000 dal lunedì al venerdì dalle 9:00 alle 18:30. Fuori da questi orari si può lasciare un messaggio in segreteria o scrivere a info@studiolumen.example: le email ricevono risposta entro un giorno lavorativo.\n\nLo studio si trova in Via Immaginaria 12, Verona (indirizzo fittizio), al primo piano con ascensore. È accessibile alle persone in carrozzina.\n\nParcheggio: nel cortile interno ci sono 4 posti riservati ai pazienti. In alternativa c'è un parcheggio pubblico a pagamento a 200 metri. La fermata dell'autobus più vicina è a 100 metri.\n\nChiusure per ferie: lo studio chiude due settimane ad agosto, di solito a cavallo di Ferragosto, e tra Natale e il 6 gennaio. Le date esatte vengono comunicate con un mese di anticipo sul sito e in sala d'attesa."
+    },
+    {
+      "id": "prezzi",
+      "titolo": "Prestazioni e prezzi indicativi",
+      "testo": "I prezzi sono indicativi e possono variare in base al caso clinico. Il prezzo definitivo viene sempre indicato in un preventivo scritto prima di iniziare le cure.\n\nPrima visita con controllo completo: 50 euro. Se nella stessa seduta si esegue l'igiene professionale, la prima visita è gratuita.\n\nIgiene professionale (detartrasi e lucidatura): 70 euro. Igiene con sbiancamento delle macchie superficiali (air polishing): 90 euro.\n\nRadiografia endorale (piccola, di un singolo dente): 20 euro. Ortopanoramica (radiografia di tutta la bocca): 40 euro. Le radiografie si fanno direttamente in studio.\n\nOtturazione (cura di una carie) in composito: da 90 a 140 euro, in base alla grandezza. Devitalizzazione (cura canalare): da 250 a 450 euro, in base al numero di canali del dente.\n\nEstrazione semplice: 90 euro. Estrazione del dente del giudizio: da 150 a 300 euro.\n\nSbiancamento professionale in studio: 300 euro. Kit di sbiancamento domiciliare con mascherine su misura: 250 euro.\n\nCorona in ceramica: da 600 euro. Impianto dentale con corona: da 1.300 euro. Per impianti e protesi serve sempre una visita e un preventivo personalizzato.\n\nOrtodonzia con apparecchio trasparente: il costo dipende dalla durata del trattamento e viene indicato nel preventivo dopo la visita ortodontica, che costa 60 euro."
+    },
+    {
+      "id": "prima-visita",
+      "titolo": "Prima visita: come funziona e cosa portare",
+      "testo": "La prima visita dura circa 45 minuti. Il dentista controlla denti, gengive e occlusione, e se serve fa una radiografia. Alla fine spiega cosa ha visto e, se ci sono cure da fare, consegna un preventivo scritto con le diverse opzioni.\n\nCosa portare: un documento d'identità, la tessera sanitaria, le radiografie recenti se ne hai (degli ultimi 2 anni) e l'elenco dei farmaci che prendi abitualmente.\n\nPrima della visita ti chiederemo di compilare un breve questionario sulla salute. Il questionario si compila in studio, su carta o su tablet, e non va mandato via email o tramite questa chat.\n\nPer i minorenni serve la presenza di un genitore o di chi ne fa le veci.\n\nArriva 10 minuti prima dell'orario dell'appuntamento per la registrazione.\n\nLa prima visita si prenota telefonando alla segreteria o scrivendo un'email. Di solito c'è disponibilità entro una settimana."
+    },
+    {
+      "id": "appuntamenti",
+      "titolo": "Appuntamenti, ritardi e disdette",
+      "testo": "Gli appuntamenti si prenotano, si spostano o si disdicono telefonando alla segreteria o scrivendo un'email. Questa chat non può prenotare né modificare appuntamenti.\n\nIl giorno prima dell'appuntamento lo studio manda un SMS di promemoria.\n\nDisdette: chiediamo di disdire o spostare un appuntamento almeno 24 ore prima. Per un appuntamento del lunedì la disdetta va fatta entro il venerdì alle 18:30.\n\nSe l'appuntamento non viene disdetto e il paziente non si presenta, alla seconda volta viene chiesto un contributo di 30 euro per il tempo riservato. La prima volta non si paga nulla.\n\nRitardi: se arrivi con più di 15 minuti di ritardo potremmo non riuscire a fare tutta la seduta prevista e potremmo doverla spostare, per non far aspettare i pazienti successivi.\n\nLista d'attesa: se cerchi un appuntamento prima della data disponibile, chiedi di essere inserito nella lista d'attesa. Ti chiamiamo appena si libera un posto."
+    },
+    {
+      "id": "pagamenti",
+      "titolo": "Pagamenti, preventivi e detrazioni fiscali",
+      "testo": "Si paga alla fine di ogni seduta. Lo studio accetta bancomat, carte di credito e debito, bonifico bancario e contanti.\n\nPer le cure lunghe (ad esempio impianti o ortodonzia) è possibile pagare a rate senza interessi, concordando il piano di pagamento al momento del preventivo.\n\nIl preventivo è sempre scritto, gratuito dopo la visita e valido 6 mesi.\n\nDetrazione fiscale: le spese dentistiche sono spese sanitarie e danno diritto alla detrazione del 19% nella dichiarazione dei redditi, per la parte che supera la franchigia di 129,11 euro all'anno. Per avere la detrazione il pagamento deve essere fatto con un mezzo tracciabile (bancomat, carta o bonifico): i pagamenti in contanti non sono detraibili.\n\nLo studio rilascia sempre la fattura e trasmette i dati delle spese al Sistema Tessera Sanitaria per la dichiarazione precompilata, salvo opposizione del paziente.\n\nLo studio non è convenzionato con il Servizio Sanitario Nazionale. È convenzionato con alcuni fondi sanitari integrativi: chiedi in segreteria se il tuo fondo è tra questi."
+    },
+    {
+      "id": "urgenze",
+      "titolo": "Urgenze",
+      "testo": "Durante l'orario di apertura lo studio riserva ogni giorno alcuni posti per le urgenze dei pazienti: dolore forte, gonfiore, dente rotto, otturazione o corona caduta. Telefona alla segreteria e spiega che si tratta di un'urgenza: cerchiamo di vederti in giornata.\n\nFuori dall'orario di apertura lo studio non ha un servizio di reperibilità.\n\nIn caso di emergenza grave, come un forte trauma al viso, difficoltà a respirare o a deglutire, un gonfiore che si estende rapidamente al viso o al collo, o febbre alta con gonfiore, chiama il 112 o vai al pronto soccorso.\n\nSe un dente permanente esce dalla sua sede per un trauma, è un'emergenza: chiama subito lo studio o il 112.\n\nQuesta chat non può valutare sintomi né dare consigli medici: per qualsiasi dubbio sulla tua salute contatta lo studio o il tuo medico."
+    },
+    {
+      "id": "bambini",
+      "titolo": "Bambini e odontoiatria pediatrica",
+      "testo": "Lo studio segue anche i bambini, con una dentista dedicata all'odontoiatria pediatrica presente il martedì e il giovedì pomeriggio.\n\nA che età portare un bambino dal dentista? Consigliamo di portare i bambini alla prima visita di controllo intorno ai 3 anni di età, oppure prima se i genitori notano macchie o problemi sui denti da latte.\n\nLa prima visita dei bambini è pensata per far prendere confidenza con lo studio e con gli strumenti, senza fretta. Dura circa 30 minuti e costa 40 euro.\n\nSigillature dei solchi dei molari permanenti, per prevenire le carie: 35 euro a dente. Di solito si fanno tra i 6 e i 12 anni.\n\nI minorenni devono essere accompagnati da un genitore o da chi ne fa le veci, che firma il consenso alle cure.\n\nPer i bambini dai 7 anni è possibile fare una visita ortodontica di controllo per valutare la crescita e l'allineamento dei denti."
+    },
+    {
+      "id": "igiene-faq",
+      "titolo": "Igiene, prevenzione e domande frequenti",
+      "testo": "Ogni quanto fare l'igiene professionale? Per la maggior parte dei pazienti consigliamo una seduta di igiene ogni 6 mesi. Il dentista può indicare una frequenza diversa in base alla situazione di ciascuno.\n\nLa seduta di igiene dura circa 45 minuti e comprende la rimozione del tartaro, la lucidatura e i consigli personalizzati sull'uso di spazzolino, filo e scovolino.\n\nLo studio usa strumenti sterilizzati in autoclave per ogni paziente e materiale monouso dove previsto.\n\nSi possono fare le cure in gravidanza? Molte cure si possono fare, ma va sempre segnalato allo studio al momento della prenotazione, così il dentista può organizzare la seduta nel modo più adatto.\n\nÈ possibile ricevere copia della propria cartella clinica e delle radiografie: si chiede in segreteria e viene consegnata entro 7 giorni.\n\nIl wifi gratuito per i pazienti è disponibile in sala d'attesa.\n\nLo studio parla italiano e inglese."
+    },
+    {
+      "id": "privacy-studio",
+      "titolo": "Privacy e dati dei pazienti",
+      "testo": "Lo studio tratta i dati dei pazienti, compresi quelli sulla salute, solo per le cure e per gli obblighi di legge, nel rispetto del GDPR. L'informativa completa si riceve e si firma in studio alla prima visita.\n\nI dati sulla salute, come sintomi, malattie, farmaci o referti, si comunicano solo di persona in studio o durante la visita. Non vanno mai inviati tramite questa chat.\n\nQuesta chat è un assistente automatico basato sull'intelligenza artificiale: risponde solo alle domande generali sullo studio usando i documenti pubblicati, non conserva le conversazioni e non ha accesso alle cartelle cliniche o agli appuntamenti dei pazienti.\n\nPer esercitare i diritti sui propri dati (accesso, rettifica, cancellazione) si può scrivere a privacy@studiolumen.example."
+    }
+  ]
+}

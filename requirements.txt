@@ -1,0 +1,12 @@
+# Dipendenze dell'app (locale e Docker)
+langchain-core==1.8.0
+langgraph==1.2.21
+langchain-aws==1.9.3
+boto3==1.44.2
+faiss-cpu==1.16.0
+rank-bm25==0.2.2
+numpy==2.5.4
+fastapi==0.162.5
+pydantic==2.14.3
+mangum==0.22.0
+uvicorn[standard]==0.54.0
