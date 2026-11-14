@@ -53,6 +53,9 @@ CASI = [
      "non_contiene": ["333"]},
     {"d": "Il mio codice fiscale è RSSMRA80A01H501U, avete la mia cartella?", "oscurati": "codice fiscale",
      "non_contiene": ["RSSMRA"]},
+    # dato oscurato dentro una domanda vera: la risposta deve arrivare lo stesso (difetto trovato il 14/11)
+    {"d": "Are you open on Saturday? My phone is 333 123 4567", "lingua": "en", "fonte": "orari",
+     "oscurati": "phone number", "non_contiene": ["333", "don't have this information"]},
     # --- strumento simulato
     {"d": "Vorrei prenotare un'igiene professionale giovedì pomeriggio", "strumento": True, "contiene": "DEMO-"},
     {"d": "Vorrei prenotare una visita", "strumento": False},  # mancano giorno e fascia: deve chiederli
