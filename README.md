@@ -58,7 +58,8 @@ flowchart LR
 | Ricerca | BM25 (parole chiave) | ibrida: embeddings Titan + BM25 |
 | Hosting | Cloudflare Pages | AWS Lambda + S3 + DynamoDB |
 | Azioni | nessuna | prenotazione simulata |
-| Test | prove manuali | 35 test automatici, 29 domande sul modello vero e valutazione RAGAS |
+| Test | prove manuali | 42 test automatici, 30 domande sul modello vero, valutazione RAGAS |
+| Osservabilità | nessuna | tracce LangSmith di ogni domanda, con i dati personali oscurati |
 
 ## Protezioni di spesa e sicurezza
 
@@ -94,8 +95,8 @@ docker run -p 8000:8000 -e LUMEN_MODALITA=finto lumen-v2
 ## Test e valutazione
 
 ```bash
-LUMEN_MODALITA=finto python -m pytest -q        # 35 test, senza AWS, in meno di un secondo
-python scripts/valuta.py                        # 29 domande al modello vero (serve AWS, pochi centesimi)
+LUMEN_MODALITA=finto python -m pytest -q        # 42 test, senza AWS, in meno di un secondo
+python scripts/valuta.py                        # 30 domande al modello vero (serve AWS, pochi centesimi)
 ```
 
 La valutazione controlla fonti citate, "non lo so", rifiuto dei consigli medici, resistenza alle istruzioni
@@ -107,21 +108,53 @@ a ogni modifica.
 Oltre ai controlli di comportamento, la qualità del RAG è misurata con [RAGAS](https://docs.ragas.io) su 12 domande
 (9 in italiano, 3 in inglese) con risposta di riferimento copiata dai documenti. Il giudice è Claude Haiku su Bedrock.
 
-| Metrica | Cosa misura | Risultato (13/11/2026) |
-| --- | --- | --- |
-| Faithfulness | la risposta dice solo cose presenti nei frammenti trovati | **0,90** |
-| Context precision | i frammenti utili sono in cima a quelli trovati | **0,81** |
-| Context recall | i frammenti trovati contengono tutto quello che serve | **1,00** |
-| Answer relevancy | la risposta resta sulla domanda | 0,33 |
+Il 14/11/2026 ho riscritto le istruzioni dell'agente (risposte di 2-3 frasi, solo quello che è chiesto, recapiti
+solo se richiesti o se l'informazione manca, con un esempio buono e uno da evitare) e ho confrontato le versioni
+sulle stesse domande con `deploy/valuta_confronto.sh`:
 
-L'ultima metrica è bassa perché l'agente aggiunge spesso recapiti e proposte oltre a quanto chiesto:
-è il prossimo punto da migliorare nel prompt.
+| | 2026-11-13 | 2026-11-14 | **2026-11-14b (online)** |
+| --- | --- | --- | --- |
+| Domande di controllo superate | 28/29 | 28/29 | 29/30 |
+| Lunghezza media delle risposte | 50 parole | 41 | 40 |
+| Faithfulness (solo cose presenti nei frammenti) | 0,90 | 0,96 | **0,98** |
+| Answer relevancy, giudice standard | 0,34 | 0,33 | 0,35 |
+| Answer relevancy, giudice adattato all'italiano | 0,60 | 0,60 | 0,61 |
+| Context precision / context recall | 0,81 / 1,00 | 0,81 / 1,00 | 0,81 / 1,00 |
+
+Cosa ho imparato dal confronto:
+
+- **La misura va controllata quanto il modello.** L'answer relevancy bassa non era colpa delle risposte: il giudice
+  di RAGAS lavora in inglese e, partendo da risposte italiane, genera domande in inglese che si confrontano male con
+  quelle vere (domande inglesi circa 0,55, italiane circa 0,29). Con le istruzioni del giudice adattate all'italiano
+  (`scripts/ragas_pertinenza_it.py`, `adapt_prompts` di RAGAS) le italiane salgono a circa 0,60.
+- **Una regola nuova può rompere un caso vecchio.** "Non proporre di prenotare" ha fatto rifiutare una prenotazione
+  chiesta esplicitamente: corretto nella 2026-11-14b, e la valutazione lo ha mostrato subito.
+- **"Ogni quanto devo fare l'igiene?" vale 0 con tutti i giudici**: RAGAS considera evasiva la frase "il dentista può
+  indicare una frequenza diversa", che però è copiata dal documento. È un limite della metrica, non dell'agente.
+
+La versione precedente delle istruzioni resta nel codice solo per le valutazioni (`LUMEN_PROMPT=2026-11-13`).
 
 ```bash
 python scripts/ragas_dati.py                                   # risposte dell'agente vero (serve AWS)
 python3 -m venv /tmp/ragas && /tmp/ragas/bin/pip install -r requirements-ragas.txt
 /tmp/ragas/bin/python scripts/ragas_punteggi.py                # punteggi (qualche centesimo)
+bash deploy/valuta_confronto.sh 2026-11-13 2026-11-14b         # confronto completo tra due versioni
 ```
+
+### Tracce con LangSmith
+
+Ogni domanda al sito diventa una traccia su [LangSmith](https://smith.langchain.com) (regione EU, piano gratuito):
+i passi del grafo LangGraph, la chiamata a Claude con i frammenti passati, lo strumento usato, tempi e token.
+Le valutazioni finiscono in un progetto separato con la versione delle istruzioni nei metadati, così si confrontano
+le risposte una per una.
+
+- Si accende solo con `LUMEN_LANGSMITH=1` e una chiave in `LANGSMITH_API_KEY` (`deploy/attiva_langsmith.sh`,
+  che chiede la chiave senza mostrarla e la salva solo nelle impostazioni della Lambda).
+- Prima dell'invio ogni testo ripassa nell'oscuramento dei dati personali (`app/tracciamento.py`): seconda rete
+  di sicurezza oltre a quella prima del modello. Verificato sul sito vero: un'email nella domanda arriva come
+  `[email oscurata]`.
+- Se LangSmith è lento o irraggiungibile la risposta al visitatore non aspetta (timeout di 3 secondi, un solo
+  nuovo tentativo); su Lambda le tracce partono prima che la funzione si congeli.
 
 RAGAS 0.4 usa una versione precedente di LangChain, per questo gira in un ambiente separato.
 
@@ -132,6 +165,8 @@ In AWS CloudShell, dalla cartella del progetto:
 ```bash
 bash deploy/crea_risorse.sh      # crea bucket, indice, tabella, ruolo, funzione e indirizzo web
 bash deploy/aggiorna_codice.sh   # aggiorna solo il codice della funzione (dopo aver caricato lumen-v2.zip)
+bash deploy/ricostruisci_pacchetto.sh  # rifà lumen-v2.zip dal pacchetto già pubblicato + il codice di questa cartella
+bash deploy/attiva_langsmith.sh  # accende le tracce LangSmith ("spegni" per toglierle)
 bash deploy/elimina_risorse.sh   # cancella tutto
 ```
 
@@ -146,13 +181,14 @@ app/
   agente.py       grafo LangGraph e formato della risposta
   ricerca.py      embeddings, indice, ricerca ibrida
   modelli.py      Claude su Bedrock con riserva Nova; modello finto per i test
-  prompt.py       regole per il modello
+  prompt.py       regole per il modello (versione attuale e precedente)
+  tracciamento.py tracce LangSmith con i dati personali oscurati
   strumenti.py    prenota_appuntamento (simulato)
   privacy.py      oscuramento dei dati personali
   limiti.py       tetto mensile (DynamoDB) e limite al minuto
 documenti/        i 9 documenti dello studio, in italiano e inglese
-scripts/          costruzione dell'indice, valutazione e RAGAS
-deploy/           creazione ed eliminazione delle risorse AWS
+scripts/          costruzione dell'indice, valutazione, RAGAS e confronto tra versioni
+deploy/           risorse AWS, aggiornamento del codice, LangSmith e confronto
 tests/            test automatici
 ```
 
@@ -163,3 +199,6 @@ tests/            test automatici
   per un servizio vero andrebbe su DynamoDB o API Gateway.
 - Nel pacchetto zip per Lambda FAISS non entra nel limite di 250 MB: lì la ricerca vettoriale usa NumPy,
   che con poche decine di frammenti dà gli stessi risultati. Con un'immagine container si userebbe FAISS.
+- In inglese la richiesta "I'd like to book a first visit on Monday morning" a volte non usa lo strumento: il documento
+  degli appuntamenti dice che la chat non può prenotare e l'agente gli dà ragione. In italiano prenota. È l'unica
+  domanda di controllo su 30 che non passa con le istruzioni attuali.

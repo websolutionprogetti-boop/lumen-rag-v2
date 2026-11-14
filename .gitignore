@@ -9,3 +9,6 @@ valutazione.json
 deploy/*.zip
 deploy/pacchetto/
 .pytest_cache/
+risultati/
+ragas_dati.json
+ragas_risultati.json
