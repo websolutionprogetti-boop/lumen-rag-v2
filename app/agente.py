@@ -20,9 +20,10 @@ from langgraph.prebuilt import ToolNode, tools_condition
 
 from .documenti import NOME_STUDIO, frammenta
 from .privacy import oscura
-from .prompt import NON_LO_SO, blocco_documenti, prompt_di_sistema
+from .prompt import NON_LO_SO, blocco_documenti, prompt_di_sistema, versione_prompt
 from .ricerca import Ricercatore
 from .strumenti import STRUMENTI
+from .tracciamento import config_traccia, svuota
 
 LIMITI = {"domanda": 500, "storia": 6, "doc_visitatore": 3, "caratteri_doc_visitatore": 12_000, "giri_strumenti": 2}
 
@@ -43,10 +44,23 @@ class Stato(TypedDict):
     ricercatore: Ricercatore
 
 
+_SEGNAPOSTO = re.compile(r"\[[^\]]*(?:oscurat|masked)[^\]]*\]", re.I)
+
+
+def testo_per_la_ricerca(domanda: str) -> str:
+    """La domanda senza le frasi che contengono dati oscurati ("il mio telefono è [telefono oscurato]"):
+    parole come "telefono" spingerebbero la ricerca verso i recapiti invece che verso la vera domanda."""
+    if not _SEGNAPOSTO.search(domanda):
+        return domanda
+    frasi = re.split(r"(?<=[.!?])\s+", domanda)
+    pulite = [f for f in frasi if not _SEGNAPOSTO.search(f)]
+    return " ".join(pulite) if pulite else re.sub(r"\s+", " ", _SEGNAPOSTO.sub(" ", domanda)).strip()
+
+
 def costruisci_grafo(modello):
     def recupera(stato: Stato) -> dict:
         ricercatore = stato["ricercatore"]
-        risultati = ricercatore.cerca(stato["domanda"], k=4)
+        risultati = ricercatore.cerca(testo_per_la_ricerca(stato["domanda"]), k=4)
         # Domanda di seguito ("e per i bambini?"): se trova poco, riprova insieme alla domanda precedente.
         if len(risultati) < 2 and stato["precedente"]:
             for d in ricercatore.cerca(stato["precedente"] + " " + stato["domanda"], k=4):
@@ -165,9 +179,12 @@ def rispondi(grafo, ricercatori: dict[str, Ricercatore], corpo: dict) -> dict:
     precedente = next((m.content for m in reversed(storia) if isinstance(m, HumanMessage)), "")
     ricercatore = ricercatori[lingua].con_documenti_visitatore(_documenti_visitatore(corpo.get("documenti"), lingua))
 
-    finale = grafo.invoke({"lingua": lingua, "domanda": domanda.testo, "precedente": precedente,
-                           "messaggi": storia, "risultati": [], "ricercatore": ricercatore},
-                          {"recursion_limit": 10})
+    try:
+        finale = grafo.invoke({"lingua": lingua, "domanda": domanda.testo, "precedente": precedente,
+                               "messaggi": storia, "risultati": [], "ricercatore": ricercatore},
+                              {"recursion_limit": 10, **config_traccia(lingua, versione_prompt())})
+    finally:
+        svuota()  # su Lambda le tracce partono prima che la funzione si congeli
     risposta = _testo(finale["messaggi"][-1]) or RISPOSTA_SICURA[lingua]
     risultati = finale["risultati"]
     azioni = [{"strumento": m.name, "risultato": m.content} for m in finale["messaggi"] if isinstance(m, ToolMessage)]
